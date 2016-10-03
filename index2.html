@@ -11,8 +11,8 @@
     <button ng-click="addCountry()">Add Country</button>
     <div ng-hide="addform">
         <form ng-submit="saveCountry()">
-            <input type="text" placeholder="Enter Country Name" name="name" ng-model="add_name"> <br/>
-            <input type="text" placeholder="Enter Country Sort Name" name="sort_name" ng-model="add_sortname">
+            <input type="text" placeholder="Enter Country Name" name="name" ng-model="new_name"> <br/>
+            <input type="text" placeholder="Enter Country Sort Name" name="sort_name" ng-model="new_sortname">
             <button type="submit" class="mr-10">Add</button>
             <button type="submit" ng-click="closeSave()" class="mr-10">Close</button>
         </form>
@@ -37,7 +37,8 @@
                 {{ country.sortname }}
             </td>
             <td>
-                <input type="button" ng-click="editCountry(country.id)" value="Edit">
+                <input type="button" ng-click="editCountry(country.id)" value="Edit" class="mr-5">
+                <input type="button" ng-click="delCountry(country.id, $index)" value="Remove" class="mr-5">
             </td>
         </tr>
     </table>

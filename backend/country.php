@@ -2,52 +2,85 @@
 if (isset($_GET)) {
     include('class/connection.class.php');
     $mysqli = connect();
-    if ($_GET['mode'] == "getAll") {
-        $query = "SELECT * FROM sp_country";
-        $result = $mysqli->query($query);
-        while ($data = $result->fetch_assoc()) {
-            $countries[] = $data;;
-        }
-        echo json_encode($countries);
-    } else if ($_GET['mode'] == "getSpec") {
-        $query = "SELECT * FROM country WHERE id='" . $_GET['id'] . "'";
-        $result = $mysqli->prepare("SELECT * FROM sp_country WHERE id='" . $_GET['id'] . "'");
-        while ($data = $result->fetch_array()) {
-            $country["id"] = $data["id"];
-            $country["name"] = $data["name"];
-            $country["sortname"] = $data["sortname"];
-        }
-        echo json_encode($country);
-    } else if ($_GET['mode'] == 'add') {
-        $postdata = file_get_contents("php://input");
-        $request = json_decode($postdata);
-        $query = "INSERT INTO country (name, sortname, flag) VALUES ('" . $request->name . "', '" . $request->sortname . "', 1)";
-        $result = $mysqli->query($query);
-        if (!$mysqli->error) {
-            $response = array("error" => 0,
-                "id" => $mysqli->insert_id,
-                "name" => $_POST['name'],
-                "sortname" => $_POST['sortname']
-            );
-        } else {
-            $response = array("error" => 1);
-        }
-        echo json_encode($response);
-    } else if ($_GET['mode'] == 'edit') {
-        $postdata = file_get_contents("php://input");
-        $request = json_decode($postdata);
-        $query = "UPDATE country SET name='" . $request->name . "', sortname='" . $request->sortname . "' WHERE id='" . $request->id . "'";
-        $result = $mysqli->query($query);
-        if (!$mysqli->error) {
-            $response = array("error" => 0,
-                "id" => $request->id,
-                "name" => $request->id,
-                "sortname" => $request->sortname
-            );
-        } else {
-            $response = array("error" => 1);
-        }
-        echo json_encode($response);
+    switch ($_GET['mode']) {
+        case 'getAll':
+            $query = "SELECT * FROM sp_country";
+            $pres = $mysqli->prepare($query);
+            $pres->execute();
+            $res = $pres->get_result();
+            while ($data = $res->fetch_assoc()) {
+                $countries[] = $data;
+            }
+            echo json_encode($countries);
+            break;
+        case 'getSpec':
+            $id = $_GET['id'];
+            $query = "SELECT id, name, sortname FROM sp_country WHERE id=?";
+            $pres = $mysqli->prepare($query);
+            $pres->bind_param('i', $id);
+            $pres->execute();
+            $pres->bind_result($id, $name, $sortname);
+            while ($pres->fetch()) {
+                $country["id"] = $id;
+                $country["name"] = $name;
+                $country["sortname"] = $sortname;
+            }
+            echo json_encode($country);
+            break;
+        case 'add':
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata);
+            $name = $mysqli->real_escape_string($request->name);
+            $sortname = $mysqli->real_escape_string($request->sortname);
+            $id = 1;
+            $query = "INSERT INTO sp_country (name, sortname, flag) VALUES (?, ?, ?)";
+            $pres = $mysqli->prepare($query);
+            $pres->bind_param('ssi', $name, $sortname, $id);
+            if ($pres->execute()) {
+                $response = array("error" => 0,
+                    "id" => $mysqli->insert_id,
+                    "name" => $name,
+                    "sortname" => $sortname
+                );
+            } else if (!$pres->execute()) {
+                $response = array("error" => 1);
+            }
+            echo json_encode($response);
+            break;
+        case 'edit':
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata);
+            $id = $request->id;
+            $name = $mysqli->real_escape_string($request->name);
+            $sortname = $mysqli->real_escape_string($request->sortname);
+            $query = "UPDATE sp_country SET name = ?, sortname = ? WHERE id = ?";
+            $pres = $mysqli->prepare($query);
+            $pres->bind_param('ssi', $name, $sortname, $id);
+            if ($pres->execute()) {
+                $response = array("error" => 0,
+                    "id" => $request->id,
+                    "name" => $name,
+                    "sortname" => $sortname
+                );
+            } else if (!$pres->execute()) {
+                $response = array("error" => 1);
+            }
+            echo json_encode($response);
+            break;
+        case 'delete':
+            $id = $_GET['id'];
+            $query = "DELETE FROM sp_country WHERE id=?";
+            $pres = $mysqli->prepare($query);
+            $pres->bind_param('i', $id);
+            if ($pres->execute()) {
+                $response = array("error" => 0,
+                    "id" => $id,
+                );
+            } else if (!$pres->execute()) {
+                $response = array("error" => 1);
+            }
+            echo json_encode($response);
+            break;
     }
     $mysqli->close();
 }

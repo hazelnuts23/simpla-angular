@@ -28,14 +28,9 @@ var cApp = angular.module("cApp", []).controller("countryCtrl", function ($scope
         })
     }
     $scope.saveCountry = function () {
-        var param = { name: $scope.add_name,
-            sortname: $scope.add_sortname
+        var param = { name: $scope.new_name,
+            sortname: $scope.new_sortname
         };
-        var config = {
-            headers : {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        }
         $http.post('/angular/backend/country.php?mode=add',
             param
         ).success(function (data) {
@@ -55,11 +50,6 @@ var cApp = angular.module("cApp", []).controller("countryCtrl", function ($scope
             name: $scope.update_name,
             sortname: $scope.update_sortname
         };
-        var config = {
-            headers : {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        }
 
         $http.put('/angular/backend/country.php?mode=edit',
             param
@@ -68,9 +58,22 @@ var cApp = angular.module("cApp", []).controller("countryCtrl", function ($scope
             if (data.error == 1) {
                 console.log("ERROR");
             } else if (data.error == 0) {
-
                     window.location.reload();
 
+            }
+        }).error(function() {
+            alert('not submitted');
+        })
+    }
+    $scope.delCountry = function(id, idx){
+        $http.delete('/angular/backend/country.php?mode=delete&id='+id
+        ).success(function (data){
+            console.log(data);
+            if (data.error == 1) {
+                console.log("ERROR");
+            } else if (data.error == 0) {
+                alert('deleted');
+                $scope.countries.splice(idx, 1);
             }
         }).error(function() {
             alert('not submitted');
