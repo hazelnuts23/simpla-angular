@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Country</title>
+    <script src="script/angular.min.js"></script>
+    <link rel="stylesheet" href="style/style.css"/>
+</head>
+<body>
+<div ng-app="cApp" ng-controller="countryCtrl">
+    <button ng-click="addCountry()">Add Country</button>
+    <div ng-hide="addform">
+        <form ng-submit="saveCountry()">
+            <input type="text" placeholder="Enter Country Name" name="name" ng-model="add_name"> <br/>
+            <input type="text" placeholder="Enter Country Sort Name" name="sort_name" ng-model="add_sortname">
+            <button type="submit" class="mr-10">Add</button>
+            <button type="submit" ng-click="closeSave()" class="mr-10">Close</button>
+        </form>
+    </div>
+    <table border="1" class="table" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Sort Name
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        <tr ng-repeat="country in countries">
+            <td>
+                {{ country.name }}
+            </td>
+            <td>
+                {{ country.sortname }}
+            </td>
+            <td>
+                <input type="button" ng-click="editCountry(country.id)" value="Edit">
+            </td>
+        </tr>
+    </table>
+
+    <div ng-hide="editform">
+        <form ng-submit="updateCountry()">
+            <input type="hidden" name="id" ng-model="update_id" ng-value="update_id"> <br/>
+            <input type="text" placeholder="Enter Country Name" name="name" ng-model="update_name"> <br/>
+            <input type="text" placeholder="Enter Country Sort Name" name="sort_name" ng-model="update_sortname">
+            <button type="submit" class="mr-10">Update</button>
+            <button type="submit" ng-click="closeUpdate()" class="mr-10">Close</button>
+        </form>
+    </div>
+</div>
+<script src="script/countryctrl.js"></script>
+</body>
+</html>

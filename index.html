@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="script/angular.min.js"></script>
+    <script src="script/controller.js"></script>
+
+</head>
+<body>
+
+<div ng-app="angApp">
+    <div ng-controller="angCtrl">
+        {{ name }}
+        <input ng-click="changeName()" type="button" value="Click Me!">
+        <div ng-repeat="x in students">
+            {{ x.name + ', '+ x.matrix }}
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
