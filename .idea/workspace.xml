@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c4d5be4-d3b5-4833-be3f-e458fbd6878f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/html.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/backend/class/connection.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/script/myUser.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/style/style.css" afterPath="$PROJECT_DIR$/style/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/country.php" afterPath="$PROJECT_DIR$/backend/country.php" />
     </list>
     <ignored path="angular.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,12 +33,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/style/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
               <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="country.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/country.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="927">
+              <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
+              <folding>
+                <marker date="1475507427000" expanded="true" signature="168:192" ph="SELECT * FRO... sp_country" />
+                <marker date="1475507427000" expanded="true" signature="551:600" ph="SELECT id, n... country" />
+                <marker date="1475507427000" expanded="true" signature="1321:1380" ph="INSERT INTO country... " />
+                <marker date="1475507427000" expanded="true" signature="2207:2261" ph="UPDATE count... " />
+                <marker date="1475507427000" expanded="true" signature="2840:2870" ph="DELETE FROM " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,6 +68,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/style/style.css" />
+        <option value="$PROJECT_DIR$/backend/country.php" />
       </list>
     </option>
   </component>
@@ -224,12 +232,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1475507335681</updated>
-      <workItem from="1475507336794" duration="34000" />
+      <workItem from="1475507336794" duration="90000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34000" />
+    <option name="totallyTimeSpent" value="90000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="1363" extended-state="0" />
@@ -283,6 +291,20 @@
         <state relative-caret-position="105">
           <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/country.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="927">
+          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
+          <folding>
+            <marker date="1475507427000" expanded="true" signature="168:192" ph="SELECT * FRO... sp_country" />
+            <marker date="1475507427000" expanded="true" signature="551:600" ph="SELECT id, n... country" />
+            <marker date="1475507427000" expanded="true" signature="1321:1380" ph="INSERT INTO country... " />
+            <marker date="1475507427000" expanded="true" signature="2207:2261" ph="UPDATE count... " />
+            <marker date="1475507427000" expanded="true" signature="2840:2870" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>

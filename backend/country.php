@@ -15,7 +15,7 @@ if (isset($_GET)) {
             break;
         case 'getSpec':
             $id = $_GET['id'];
-            $query = "SELECT id, name, sortname FROM sp_country WHERE id=?";
+            $query = "SELECT id, name, sortname FROM country WHERE id=?";
             $pres = $mysqli->prepare($query);
             $pres->bind_param('i', $id);
             $pres->execute();
@@ -33,7 +33,7 @@ if (isset($_GET)) {
             $name = $mysqli->real_escape_string($request->name);
             $sortname = $mysqli->real_escape_string($request->sortname);
             $id = 1;
-            $query = "INSERT INTO sp_country (name, sortname, flag) VALUES (?, ?, ?)";
+            $query = "INSERT INTO country (name, sortname, flag) VALUES (?, ?, ?)";
             $pres = $mysqli->prepare($query);
             $pres->bind_param('ssi', $name, $sortname, $id);
             if ($pres->execute()) {
@@ -53,7 +53,7 @@ if (isset($_GET)) {
             $id = $request->id;
             $name = $mysqli->real_escape_string($request->name);
             $sortname = $mysqli->real_escape_string($request->sortname);
-            $query = "UPDATE sp_country SET name = ?, sortname = ? WHERE id = ?";
+            $query = "UPDATE country SET name = ?, sortname = ? WHERE id = ?";
             $pres = $mysqli->prepare($query);
             $pres->bind_param('ssi', $name, $sortname, $id);
             if ($pres->execute()) {
@@ -69,7 +69,7 @@ if (isset($_GET)) {
             break;
         case 'delete':
             $id = $_GET['id'];
-            $query = "DELETE FROM sp_country WHERE id=?";
+            $query = "DELETE FROM country WHERE id=?";
             $pres = $mysqli->prepare($query);
             $pres->bind_param('i', $id);
             if ($pres->execute()) {
