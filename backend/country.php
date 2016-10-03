@@ -4,7 +4,7 @@ if (isset($_GET)) {
     $mysqli = connect();
     switch ($_GET['mode']) {
         case 'getAll':
-            $query = "SELECT * FROM sp_country";
+            $query = "SELECT * FROM country";
             $pres = $mysqli->prepare($query);
             $pres->execute();
             $res = $pres->get_result();
