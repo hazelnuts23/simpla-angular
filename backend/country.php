@@ -10,8 +10,8 @@ if (isset($_GET)) {
         }
         echo json_encode($countries);
     } else if ($_GET['mode'] == "getSpec") {
-        $query = "SELECT * FROM sp_country WHERE id='" . $_GET['id'] . "'";
-        $result = $mysqli->query($query);
+        $query = "SELECT * FROM country WHERE id='" . $_GET['id'] . "'";
+        $result = $mysqli->prepare("SELECT * FROM sp_country WHERE id='" . $_GET['id'] . "'");
         while ($data = $result->fetch_array()) {
             $country["id"] = $data["id"];
             $country["name"] = $data["name"];
@@ -21,7 +21,7 @@ if (isset($_GET)) {
     } else if ($_GET['mode'] == 'add') {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
-        $query = "INSERT INTO sp_country (name, sortname, flag) VALUES ('" . $request->name . "', '" . $request->sortname . "', 1)";
+        $query = "INSERT INTO country (name, sortname, flag) VALUES ('" . $request->name . "', '" . $request->sortname . "', 1)";
         $result = $mysqli->query($query);
         if (!$mysqli->error) {
             $response = array("error" => 0,
@@ -36,7 +36,7 @@ if (isset($_GET)) {
     } else if ($_GET['mode'] == 'edit') {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
-        $query = "UPDATE sp_country SET name='" . $request->name . "', sortname='" . $request->sortname . "' WHERE id='" . $request->id . "'";
+        $query = "UPDATE country SET name='" . $request->name . "', sortname='" . $request->sortname . "' WHERE id='" . $request->id . "'";
         $result = $mysqli->query($query);
         if (!$mysqli->error) {
             $response = array("error" => 0,
